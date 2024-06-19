@@ -1,3 +1,5 @@
+// https://blog.touchczy.top/#/Patterns/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F
+// ChatRoom 充当中介 链接用户之间的交流
 class ChatRoom {
 	logMessage(user, message) {
 		const sender = user.getName()
