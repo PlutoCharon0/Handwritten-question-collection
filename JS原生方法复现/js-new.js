@@ -1,7 +1,7 @@
-function _new(fn, ...args) {
-	const obj = Object.create(fn.prototype)
+function _new(constructorFn, ...args) {
+	const obj = Object.create(constructorFn.prototype)
 
-	const result = fn.call(fn, ...args)
+	const result = constructorFn.call(obj, ...args)
 
-	return typeof result === 'object' ? result : obj
+	return result instanceof Object ? result : obj
 }
