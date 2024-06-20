@@ -1,6 +1,9 @@
 # 忽略同目录下的 index.js 文件
 index.js
 
+# 不忽略子目录中的 index.js 文件
+!*/index.js
+
 # 忽略任何目录下的 node_modules 文件夹
 node_modules/
 
