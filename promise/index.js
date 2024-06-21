@@ -159,6 +159,41 @@ class MyPromise {
 
 		return promiseForReturn
 	}
+	catch(onRejected) {
+		return this.then(undefined, onRejected)
+	}
+	finally(onFinally) {
+		return this.then(
+			(result) => {
+				return MyPromise.resolve(onFinally()).then(() => result)
+			},
+			(reason) => {
+				return MyPromise.resolve(onFinally()).then(() => {
+					throw reason
+				})
+			}
+		)
+	}
+	static resolve(value) {
+		if (value instanceof MyPromise) return value
+		if (
+			value !== null &&
+			(typeof value === 'object' || typeof value === 'function') &&
+			typeof value.then === 'function'
+		) {
+			return new MyPromise((resolve, reject) => {
+				value.then(resolve, reject)
+			})
+		}
+		return new MyPromise((resolve) => {
+			resolve(value)
+		})
+	}
+	static reject(value) {
+		return new MyPromise((resolve, reject) => {
+			reject(value)
+		})
+	}
 }
 
 MyPromise.deferred = function () {
